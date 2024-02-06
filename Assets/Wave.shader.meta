@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: cb69ec503b7942342981e99d39f12635
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _Stex: {fileID: 8400000, guid: 25f9be7dfd9728845a09969173bd85d5, type: 2}
+  - _Mtex: {fileID: 8400000, guid: 1a905e3d3f65892468abba6ba912457c, type: 2}
+  - _Ltex: {fileID: 8400000, guid: e884f18850429244e8e81f88feeced87, type: 2}
+  - _XLtex: {fileID: 8400000, guid: d40652b6855684246b90070687ee1a9a, type: 2}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
