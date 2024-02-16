@@ -1,8 +1,14 @@
-Shader "wwc/wave_glsl"
+Shader "wwc/wave_shaderlab"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
+        _Tex1 ("Texture1", 2D) = "white" {}
+        _Tex2 ("Texture2", 2D) = "white" {}
+        _Tex3 ("Texture3", 2D) = "white" {}
+
+        _BarCount ("BarCount", Int) = 10
+        _LevelCount ("LevelCount", Int) = 3
+        _Frame ("Frame", Int) = 0
     }
     SubShader
     {
@@ -32,14 +38,14 @@ Shader "wwc/wave_glsl"
                 float4 vertex : SV_POSITION;
             };
 
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
+            sampler2D _Tex1;
+            float4 _Tex1_ST;
 
             v2f vert (appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.uv = TRANSFORM_TEX(v.uv, _Tex1);
                 UNITY_TRANSFER_FOG(o,o.vertex);
                 return o;
             }
@@ -47,7 +53,7 @@ Shader "wwc/wave_glsl"
             fixed4 frag (v2f i) : SV_Target
             {
                 // sample the texture
-                fixed4 col = tex2D(_MainTex, i.uv);
+                fixed4 col = tex2D(_Tex1, i.uv);
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;
