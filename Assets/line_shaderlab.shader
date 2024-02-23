@@ -1,6 +1,6 @@
 // Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
-Shader "wwc/wave_shaderlab"
+Shader "wwc/line_shaderlab"
 {
     Properties
     {
@@ -61,6 +61,22 @@ Shader "wwc/wave_shaderlab"
                 }
             }
 
+            // float drawLine (vec2 p1, vec2 p2, vec2 uv, float a) {
+            //     float r = 0.;
+            //     float one_px = 1. / iResolution.x; //not really one px
+    
+            //     // get dist between points
+            //     float d = distance(p1, p2);
+    
+            //     // get dist between current pixel and p1
+            //     float duv = distance(p1, uv);
+
+            //     //if point is on line, according to dist, it should match current uv 
+            //     r = 1.-floor(1.-(a*one_px)+distance (mix(p1, p2, clamp(duv/d, 0., 1.)),  uv));
+        
+            //     return r;
+            // }
+
             sampler2D _Tex1;
             float4 _Tex1_ST;
 
@@ -76,8 +92,8 @@ Shader "wwc/wave_shaderlab"
             {
                 // sample the texture
                 // fixed4 col = tex2D(_Tex1, i.uv) * tex2D(_Tex1, i.uv).a;
-                float L = link(i.uv, float2(0.1,0.7), float2(0.9,0.7), 0.01, 10.0);
-                fixed4 col = fixed4(float3(L, L, L), 1.0);
+                // float L = link(i.uv, float2(0.1,0.7), float2(0.9,0.7), 0.01, 10.0) + u_time;
+                fixed4 col = fixed4(float3(L, L, L), 1.0) + u_time;
                 return col;
             }
             ENDCG
