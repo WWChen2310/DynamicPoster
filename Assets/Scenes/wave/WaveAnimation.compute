@@ -1,0 +1,31 @@
+#pragma kernel WaveAnimation
+
+int ColCount;
+float4 XRange;
+int RowCount;
+float4 YRange;
+float Speed;
+float Slope;
+
+float Time;
+RWStructuredBuffer<float2> SinBuffer;
+
+float sinEngine(int aCount, float aLength, int bCount, float bLength, float Speed, float slopeN)
+{
+	float sinus = sin((-Time * Speed + aCount * aLength + bCount * bLength));
+	float sign = (sinus >= 0 ? 1 : -1);
+	float sinerSquare = sign * (1 - pow(1 - abs(sinus), slopeN));
+	return sinerSquare;
+}
+
+[numthreads(8, 8, 1)]
+void WaveAnimation(uint2 id : SV_DispatchThreadID)
+{
+	float res = 0;
+	for (int i = 0; i < ColCount; i++)
+	{
+		//res += sinEngine(i, aLength, bCount, bLength, Speed, Slope);
+	}
+	uint index = id.x + id.y * 64;
+	//SinBuffer[index] = float2(res, res + sinEngine(aCount, aLength, bCount, bLength, Speed, Slope));
+}
